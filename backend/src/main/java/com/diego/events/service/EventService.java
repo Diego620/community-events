@@ -1,6 +1,7 @@
 package com.diego.events.service;
 
 import com.diego.events.entity.Event;
+import com.diego.events.entity.EventStatus;
 import com.diego.events.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,10 @@ public class EventService {
 
     public Optional<Event> getEventById(Long id) {
         return eventRepository.findById(id);
+    }
+
+    public Event createEvent(Event event) {
+        event.setStatus(EventStatus.PENDING_REVIEW);
+        return eventRepository.save(event);
     }
 }
