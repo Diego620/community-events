@@ -48,4 +48,18 @@ public class EventController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PatchMapping("/{id}/publish")
+    public ResponseEntity<Event> publishEvent(@PathVariable Long id) {
+        return eventService.publishEvent(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/{id}/reject")
+    public ResponseEntity<Event> rejectEvent(@PathVariable Long id) {
+        return eventService.rejectEvent(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

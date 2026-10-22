@@ -48,4 +48,30 @@ public class EventService {
 
         return Optional.of(eventRepository.save(event));
     }
+
+    public Optional<Event> publishEvent(Long id) {
+        Optional<Event> existingEvent = eventRepository.findById(id);
+
+        if (existingEvent.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Event event = existingEvent.get();
+        event.setStatus(EventStatus.PUBLISHED);
+
+        return Optional.of(eventRepository.save(event));
+    }
+
+    public Optional<Event> rejectEvent(Long id) {
+        Optional<Event> existingEvent = eventRepository.findById(id);
+
+        if (existingEvent.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Event event = existingEvent.get();
+        event.setStatus(EventStatus.REJECTED);
+
+        return Optional.of(eventRepository.save(event));
+    }
 }
