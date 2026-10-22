@@ -1,8 +1,8 @@
 ﻿# Step 03 - React frontend + talk to the backend
 
 ## Checklist
-- [ ] Open a terminal in the `community-events` folder (not inside `backend`)
-- [ ] Create the React app
+- [x] Open a terminal in the `community-events` folder (not inside `backend`)
+- [x] Create the React app
 ```bash
   npm create vite@latest frontend -- --template react-ts
   cd frontend
