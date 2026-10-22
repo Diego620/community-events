@@ -26,7 +26,26 @@ public class EventService {
     }
 
     public Event createEvent(Event event) {
+        event.setId(null);
         event.setStatus(EventStatus.PENDING_REVIEW);
         return eventRepository.save(event);
+    }
+
+    public Optional<Event> updateEvent(Long id, Event updatedEvent) {
+        Optional<Event> existingEvent =
+                eventRepository.findByIdAndOrganiserId(
+                        id, updatedEvent.getOrganiserId());
+
+        if (existingEvent.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Event event = existingEvent.get();
+        event.setTitle(updatedEvent.getTitle());
+        event.setDescription(updatedEvent.getDescription());
+        event.setEventDate(updatedEvent.getEventDate());
+        event.setCapacity(updatedEvent.getCapacity());
+
+        return Optional.of(eventRepository.save(event));
     }
 }

@@ -38,4 +38,14 @@ public class EventController {
                 .status(HttpStatus.CREATED)
                 .body(createdEvent);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Event> updateEvent(
+            @PathVariable Long id,
+            @RequestBody Event updatedEvent) {
+
+        return eventService.updateEvent(id, updatedEvent)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
