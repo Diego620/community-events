@@ -37,6 +37,7 @@ A full-stack web application for managing community events, handling visitor reg
 
 - SQLite persistence using Spring Data JPA and Hibernate.
 - Server-side validation for event data.
+- Swagger API documentation for exploring and testing REST endpoints.
 - Application logging for event publication and registration creation.
 - Automatic sample data seeding when the events database is empty.
 
@@ -48,6 +49,7 @@ A full-stack web application for managing community events, handling visitor reg
 | Frontend tooling | Node.js, npm |
 | Backend | Java, Spring Boot |
 | API | Spring Web / REST |
+| API documentation | Swagger / OpenAPI |
 | Persistence | Spring Data JPA, Hibernate |
 | Database | SQLite |
 | Validation | Jakarta Bean Validation |
