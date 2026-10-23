@@ -4,6 +4,8 @@ import com.diego.events.entity.Event;
 import com.diego.events.entity.EventStatus;
 import com.diego.events.repository.EventRepository;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.Optional;
 @Service
 public class EventService {
 
+    private static final Logger logger = LoggerFactory.getLogger(EventService.class);
     private final EventRepository eventRepository;
 
     public EventService(EventRepository eventRepository) {
@@ -21,6 +24,14 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> getPublishedEvents() {
+        return eventRepository.findByStatus(EventStatus.PUBLISHED);
+    }
+
+    public List<Event> getEventsByOrganiser(String organiserId) {
+        return eventRepository.findByOrganiserId(organiserId);
+    }
+
     public Optional<Event> getEventById(Long id) {
         return eventRepository.findById(id);
     }
@@ -28,7 +39,9 @@ public class EventService {
     public Event createEvent(Event event) {
         event.setId(null);
         event.setStatus(EventStatus.PENDING_REVIEW);
-        return eventRepository.save(event);
+        Event savedEvent = eventRepository.save(event);
+        logger.info("Event {} was created.", savedEvent.getId());
+        return savedEvent;
     }
 
     public Optional<Event> updateEvent(Long id, Event updatedEvent) {
@@ -46,7 +59,9 @@ public class EventService {
         event.setEventDate(updatedEvent.getEventDate());
         event.setCapacity(updatedEvent.getCapacity());
 
-        return Optional.of(eventRepository.save(event));
+        Event savedEvent = eventRepository.save(event);
+        logger.info("Event {} was updated.", savedEvent.getId());
+        return Optional.of(savedEvent);
     }
 
     public Optional<Event> publishEvent(Long id) {
@@ -59,7 +74,9 @@ public class EventService {
         Event event = existingEvent.get();
         event.setStatus(EventStatus.PUBLISHED);
 
-        return Optional.of(eventRepository.save(event));
+        Event savedEvent = eventRepository.save(event);
+        logger.info("Event {} was published.", savedEvent.getId());
+        return Optional.of(savedEvent);
     }
 
     public Optional<Event> rejectEvent(Long id) {
@@ -72,6 +89,8 @@ public class EventService {
         Event event = existingEvent.get();
         event.setStatus(EventStatus.REJECTED);
 
-        return Optional.of(eventRepository.save(event));
+        Event savedEvent = eventRepository.save(event);
+        logger.info("Event {} was rejected.", savedEvent.getId());
+        return Optional.of(savedEvent);
     }
 }

@@ -5,6 +5,7 @@ import com.diego.events.service.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -19,8 +20,17 @@ public class EventController {
     }
 
     @GetMapping
-    public List<Event> getAllEvents() {
+    public List<Event> getAllEvents(
+            @RequestParam(required = false) String organiserId) {
+        if (organiserId != null && !organiserId.isBlank()) {
+            return eventService.getEventsByOrganiser(organiserId);
+        }
         return eventService.getAllEvents();
+    }
+
+    @GetMapping("/published")
+    public List<Event> getPublishedEvents() {
+        return eventService.getPublishedEvents();
     }
 
     @GetMapping("/{id}")
@@ -31,7 +41,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+    public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) {
         Event createdEvent = eventService.createEvent(event);
 
         return ResponseEntity
@@ -42,7 +52,7 @@ public class EventController {
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(
             @PathVariable Long id,
-            @RequestBody Event updatedEvent) {
+            @Valid @RequestBody Event updatedEvent) {
 
         return eventService.updateEvent(id, updatedEvent)
                 .map(ResponseEntity::ok)
