@@ -3,6 +3,7 @@ import type { Role } from "./types/event";
 import RoleSelection from "./pages/RoleSelection";
 import VisitorDashboard from "./components/VisitorDashboard";
 import OrganiserDashboard from "./components/OrganiserDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
   const [selectedRole, setSelectedRole] = useState<Role | null>(null);
@@ -34,7 +35,7 @@ function App() {
               <main>
                 {selectedRole === "visitor" && <VisitorDashboard />}
                 {selectedRole === "organiser" && (<OrganiserDashboard organiserId={organiserId} />)}
-                {selectedRole === "admin" && <h1>Admin Dashboard</h1>}
+                {selectedRole === "admin" && <AdminDashboard />}
               </main>
             </>
         )}
