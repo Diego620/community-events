@@ -1,7 +1,7 @@
 ﻿# Step 06 - Event service
 
 ## Checklist
-- [x] Create a new package `service` under `backend/src/main/java/com/diego/events`
+- [x] Create a new package `service` under `../../backend/src/main/java/com/diego/events`
 - [x] Create the `EventService` Java class inside `service`
 - [x] Inject `EventRepository` into `EventService` using constructor injection
 - [x] Create a method to retrieve all events using `eventRepository.findAll()`

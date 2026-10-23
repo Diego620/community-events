@@ -11,7 +11,7 @@
 ```
 - If Vite asks extra questions, pick the plain/default option
 - [x] Open `http://localhost:5173` and see the Vite starter page
-- [x] Open `frontend/src/App.tsx`, delete everything and paste
+- [x] Open `../../frontend/src/App.tsx`, delete everything and paste
 ```tsx
   import { useEffect, useState } from "react";
 
@@ -55,7 +55,7 @@
 ```
 - Restart the backend and refresh the page
 - [x] Check `git status` from `community-events` BEFORE committing
-    - `frontend/node_modules` must NOT be listed
+    - `../../frontend/node_modules` must NOT be listed
 - [x] Commit and push
 ```bash
   git add .

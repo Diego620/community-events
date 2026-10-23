@@ -1,7 +1,7 @@
 ﻿# Step 07 - Event controller
 
 ## Checklist
-- [x] Create a new package `controller` under `backend/src/main/java/com/diego/events`
+- [x] Create a new package `controller` under `../../backend/src/main/java/com/diego/events`
 - [x] Create the `EventController` Java class inside `controller`
 - [x] Add the `@RestController` annotation
 - [x] Add the `@RequestMapping("/api/events")` annotation to define the base URL

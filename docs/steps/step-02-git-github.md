@@ -13,7 +13,7 @@
   git push -u origin Master
 ```
 - [x] Refresh the GitHub repo and check:
-    - `../backend` folder is there
+    - `../../backend` folder is there
     - `events.db` is NOT there
     - `target/` is NOT there
 

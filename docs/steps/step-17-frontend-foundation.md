@@ -5,7 +5,7 @@
 - [x] Add `"PATCH"` to `allowedMethods` in `CorsConfig` and restart the backend
 - [x] Delete the Vite starter leftovers: `hero.png`, `react.svg` and `vite.svg`
 - [x] Empty the contents of `App.css` and `index.css` (don't delete the files, `main.tsx` imports `index.css`)
-- [x] Create `components`, `services` and `types` folders under `frontend/src`
+- [x] Create `components`, `services` and `types` folders under `../../frontend/src`
 - [x] Create a TypeScript type for `Event` matching the backend fields
 - [x] Create types for the event status and the role (visitor, organiser, admin)
 - [x] Create an `eventService` file in `services` with one function per endpoint:

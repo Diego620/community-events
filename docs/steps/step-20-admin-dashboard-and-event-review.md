@@ -2,7 +2,7 @@
 
 ## Checklist
 
-- [x] Create an `AdminDashboard.tsx` component under `frontend/src/components`
+- [x] Create an `AdminDashboard.tsx` component under `../../frontend/src/components`
 - [x] Fetch and display all events using `getAllEvents()`
 - [x] Display each event's title, description, date/time, capacity, organiser ID, and status
 - [x] Display a loading message while events are being fetched

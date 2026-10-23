@@ -2,7 +2,7 @@
 
 ## Checklist
 
-- [x] Create a `VisitorDashboard.tsx` component under `frontend/src/components`
+- [x] Create a `VisitorDashboard.tsx` component under `../../frontend/src/components`
 - [x] Display published events using `getPublishedEvents()` from `eventService.ts`
 - [x] Load events when the Visitor dashboard opens
 - [x] Show each event's title, description, date/time, capacity, and other useful details

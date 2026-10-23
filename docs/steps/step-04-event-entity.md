@@ -1,7 +1,7 @@
 ﻿# Step 04 - Event entity (creates the events table)
 
 ## Checklist
-- [x] Create a new package `entity` under `backend/src/main/java/com/diego/events`
+- [x] Create a new package `entity` under `../../backend/src/main/java/com/diego/events`
 - [x] Create the enum `EventStatus` in `entity`
     - 3 values: `PENDING_REVIEW`, `PUBLISHED`, `REJECTED`
     - New > Java Class > pick "Enum"

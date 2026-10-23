@@ -1,7 +1,7 @@
 ﻿# Step 05 - Event repository
 
 ## Checklist
-- [x] Create a new package `repository` under `backend/src/main/java/com/diego/events`
+- [x] Create a new package `repository` under `../../backend/src/main/java/com/diego/events`
 - [x] Create the interface `EventRepository` in `repository`
     - New > Java Class > choose `Interface`
 - [x] Extend `JpaRepository<Event, Long>`

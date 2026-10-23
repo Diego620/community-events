@@ -2,7 +2,7 @@
 
 ## Checklist
 
-- [x] Create an `OrganiserDashboard.tsx` component under `frontend/src/components`
+- [x] Create an `OrganiserDashboard.tsx` component under `../../frontend/src/components`
 - [x] Pass the selected `organiserId` from `App.tsx` to `OrganiserDashboard`
 - [x] Fetch and display events belonging to the selected organiser using `getEventsByOrganiser()`
 - [x] Display each event's title, description, date/time, capacity, and status

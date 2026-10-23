@@ -13,7 +13,6 @@ A full-stack web application for managing community events, handling visitor reg
 - [Testing](#testing)
 - [Demonstration Guide](#demonstration-guide)
 - [Trade-offs and Future Improvements](#trade-offs-and-future-improvements)
-- [AI-Use Declaration](#ai-use-declaration)
 
 ## Features
 
@@ -336,16 +335,12 @@ With additional time, I would prioritise:
 8. Improve error handling, loading states, and user feedback.
 9. Improve configuration and deployment support for production environments.
 
-## AI-Use Declaration
+### Personal Contribution and AI-Use Declaration
 
-AI tools were used as learning and development aids throughout this assignment.
+This was my first time working with Java and Spring Boot, with no prior experience in either Java or Python. My background is in C# and .NET, so I spent much of the 48-hour period learning Java syntax and Spring Boot, which I found conceptually similar to ASP.NET Core.
 
-This was my first time working with Java and Spring Boot, and I had no prior experience with either Java or Python. My background is in C# and .NET, so I spent much of the 48-hour period learning Java syntax and Spring Boot, which I found conceptually similar to ASP.NET Core.
+I used AI assistants, including GitHub Copilot and Claude, alongside official documentation, Google, and other online resources to research concepts, troubleshoot issues, and break down requirements. Before coding, I planned my approach and used AI to turn my notes into manageable Markdown checklists. My `steps` folder contains 21 step files documenting this process and helping me track development progress.
 
-I used AI assistants (GitHub Copilot and Claude), official documentation, Google searches, and other online resources to research concepts, troubleshoot issues, and break down requirements. Before coding, I brainstormed an implementation plan and used AI to turn my notes into manageable Markdown checklists. My `steps` folder contains 21 step files documenting this process and helping me track development progress.
+I also used Figma AI to generate a design template and assist with CSS styling, allowing me to focus more on functionality and learning the backend technologies, as prioritised by the assignment.
 
-I also used Figma AI to generate a design template and assist with CSS styling. Since the assignment prioritised functionality over visual design, this allowed me to focus more time on learning the backend technologies and implementing the required workflows.
-
-I reviewed and adapted suggested solutions, worked through integration and debugging issues, and tested the application through its development workflows. This assignment gave me a foundational understanding of Java and Spring Boot while allowing me to apply my existing development experience to a new technology stack.
-
-I take responsibility for the submitted implementation, its limitations, and the technical decisions made throughout development.
+I reviewed and adapted the suggested solutions, worked through integration issues, and tested the application. This assignment gave me a basic understanding of Java and Spring Boot while applying my existing development experience to a new technology stack.
