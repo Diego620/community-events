@@ -1,12 +1,12 @@
 ﻿# Step 01 - Backend setup (Spring Boot + SQLite + health check)
 
 ## Checklist
-- [ ] Create the project in IntelliJ
+- [x] Create the project in IntelliJ
     - New Project > Spring Boot, Maven, Java 17
     - Name `backend`, location `~\IdeaProjects\community-events`
     - Group `com.diego`, artifact `events`, package `com.diego.events`
     - Dependencies: Spring Web, Spring Data JPA, Validation
-- [ ] Add SQLite to `pom.xml` inside `<dependencies>`, then reload Maven
+- [x] Add SQLite to `pom.xml` inside `<dependencies>`, then reload Maven
 ```xml
   <dependency>
       <groupId>org.xerial</groupId>
@@ -18,14 +18,14 @@
       <artifactId>hibernate-community-dialects</artifactId>
   </dependency>
 ```
-- [ ] Paste into `src/main/resources/application.properties`
+- [x] Paste into `src/main/resources/application.properties`
 ```properties
   spring.datasource.url=jdbc:sqlite:events.db
   spring.datasource.driver-class-name=org.sqlite.JDBC
   spring.jpa.database-platform=org.hibernate.community.dialect.SQLiteDialect
   spring.jpa.hibernate.ddl-auto=update
 ```
-- [ ] Add the health endpoint: new package `controller`, new class `HealthController`
+- [x] Add the health endpoint: new package `controller`, new class `HealthController`
 ```java
   package com.diego.events.controller;
 
@@ -45,8 +45,8 @@
       }
   }
 ```
-- [ ] Run `BackendApplication` (green play button)
-- [ ] Open `http://localhost:8080/api/health` and see `{"status":"ok"}`
+- [x] Run `BackendApplication` (green play button)
+- [x] Open `http://localhost:8080/api/health` and see `{"status":"ok"}`
 
 ## Notes / gotchas
 - Error `java: illegal character: '\ufeff'` = a hidden BOM (invisible character) at the start of a .java file. Fix: open the file, press Shift twice (Search Everywhere), search "Remove BOM", and click it. Then rebuild.

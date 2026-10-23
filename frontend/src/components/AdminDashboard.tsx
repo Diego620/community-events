@@ -6,6 +6,7 @@ function AdminDashboard() {
     const [events, setEvents] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
     const [processingId, setProcessingId] = useState<number | null>(null);
+    const [processingAction, setProcessingAction] = useState<"publish" | "reject" | null>(null);
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const pendingEvents = events.filter((event) => event.status === "PENDING_REVIEW");
@@ -32,6 +33,7 @@ function AdminDashboard() {
 
     async function handleReview(eventId: number, action: "publish" | "reject") {
         setProcessingId(eventId);
+        setProcessingAction(action);
         setError("");
         setMessage("");
 
@@ -51,6 +53,7 @@ function AdminDashboard() {
             );
         } finally {
             setProcessingId(null);
+            setProcessingAction(null);
         }
     }
 
@@ -106,7 +109,7 @@ function AdminDashboard() {
                                     disabled={processingId !== null}
                                     className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
                                 >
-                                    {processingId === event.id
+                                    {processingId === event.id && processingAction === "publish"
                                         ? "Processing..."
                                         : "Publish"}
                                 </button>
@@ -119,7 +122,7 @@ function AdminDashboard() {
                                     disabled={processingId !== null}
                                     className="rounded-xl border border-red-200 bg-white px-4 py-2.5 text-sm font-bold text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
                                 >
-                                    {processingId === event.id
+                                    {processingId === event.id && processingAction === "reject"
                                         ? "Processing..."
                                         : "Reject"}
                                 </button>

@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {getPublishedEvents, registerInterest,} from "../services/eventService";
 import type { Event } from "../types/event";
 
@@ -9,6 +9,11 @@ function VisitorDashboard() {
     const [registeringId, setRegisteringId] = useState<number | null>(null);
     const [message, setMessage] = useState("");
     const [messageIsError, setMessageIsError] = useState(false);
+    const [registeredEventIds, setRegisteredEventIds] = useState<Set<number>>(
+        new Set(),
+    );
+    const [fullEventIds, setFullEventIds] = useState<Set<number>>(new Set());
+    const registeringEventIds = useRef(new Set<number>());
 
     useEffect(() => {
         async function loadEvents() {
@@ -30,21 +35,32 @@ function VisitorDashboard() {
     }, []);
 
     async function handleRegister(eventId: number) {
+        if (
+            registeringEventIds.current.has(eventId) ||
+            registeredEventIds.has(eventId)
+        ) {
+            return;
+        }
+
+        registeringEventIds.current.add(eventId);
         setRegisteringId(eventId);
         setMessage("");
         setMessageIsError(false);
 
         try {
             await registerInterest(eventId);
+            setRegisteredEventIds((current) => new Set(current).add(eventId));
             setMessage("Successfully registered your interest!");
         } catch (err) {
+            const errorMessage =
+                err instanceof Error ? err.message : "Registration failed.";
+            if (errorMessage.toLowerCase().includes("full")) {
+                setFullEventIds((current) => new Set(current).add(eventId));
+            }
             setMessageIsError(true);
-            setMessage(
-                err instanceof Error
-                    ? err.message
-                    : "Registration failed."
-            );
+            setMessage(errorMessage);
         } finally {
+            registeringEventIds.current.delete(eventId);
             setRegisteringId(null);
         }
     }
@@ -65,18 +81,20 @@ function VisitorDashboard() {
                 <p className="mt-3 text-base leading-7 text-slate-600">Find something nearby and let the organiser know you’re interested.</p>
             </div>
 
-            {message && (
-                <p
-                    role="status"
-                    className={`mt-7 rounded-xl border px-4 py-3 text-sm font-semibold ${
-                        messageIsError
-                            ? "border-red-200 bg-red-50 text-red-700"
-                            : "border-emerald-200 bg-emerald-50 text-emerald-700"
-                    }`}
-                >
-                    {message}
-                </p>
-            )}
+            <div className="mt-7 min-h-12">
+                {message && (
+                    <p
+                        role="status"
+                        className={`rounded-xl border px-4 py-3 text-sm font-semibold ${
+                            messageIsError
+                                ? "border-red-200 bg-red-50 text-red-700"
+                                : "border-emerald-200 bg-emerald-50 text-emerald-700"
+                        }`}
+                    >
+                        {message}
+                    </p>
+                )}
+            </div>
 
             {events.length === 0 ? (
                 <div className="mt-10 rounded-2xl border border-dashed border-slate-300 bg-white px-8 py-20 text-center">
@@ -85,8 +103,12 @@ function VisitorDashboard() {
                 </div>
             ) : (
                 <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                    {events.map((event) => (
-                        <article key={event.id} className="flex min-h-80 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60 transition hover:-translate-y-1 hover:shadow-lg">
+                    {events.map((event) => {
+                        const hasRegistered = registeredEventIds.has(event.id);
+                        const isFull = fullEventIds.has(event.id);
+
+                        return (
+                            <article key={event.id} className="flex min-h-80 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60 transition hover:-translate-y-1 hover:shadow-lg">
                             <p className="text-xs font-bold uppercase tracking-[0.13em] text-blue-600">Community event</p>
                             <h2 className="mt-5 text-xl font-bold tracking-tight text-slate-950">{event.title}</h2>
                             <p className="mt-2 text-sm leading-6 text-slate-600">{event.description}</p>
@@ -97,13 +119,20 @@ function VisitorDashboard() {
                             </div>
                             <button
                                 onClick={() => handleRegister(event.id)}
-                                disabled={registeringId === event.id}
+                                disabled={registeringId === event.id || hasRegistered || isFull}
                                 className="mt-auto min-h-11 rounded-xl bg-blue-600 px-4 text-sm font-bold text-white shadow-sm shadow-blue-600/20 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                             >
-                                {registeringId === event.id ? "Registering..." : "Register interest"}
+                                {registeringId === event.id
+                                    ? "Registering..."
+                                    : hasRegistered
+                                      ? "Interest registered"
+                                      : isFull
+                                        ? "Event full"
+                                      : "Register interest"}
                             </button>
-                        </article>
-                    ))}
+                            </article>
+                        );
+                    })}
                 </div>
             )}
         </main>

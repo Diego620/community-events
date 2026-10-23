@@ -29,3 +29,7 @@ build/
 .vscode/
 
 events.db
+
+*.db
+*.sqlite
+*.sqlite3
