@@ -1,16 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import type { Role } from "./types/event";
+import RoleSelection from "./pages/RoleSelection";
 
 function App() {
-  const [status, setStatus] = useState("loading...");
+  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
+  const [organiserId, setOrganiserId] = useState("organiser-1");
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/health")
-        .then((res) => res.json())
-        .then((data) => setStatus(data.status))
-        .catch(() => setStatus("backend unreachable"));
-  }, []);
+  function switchRole() {
+    setSelectedRole(null);
+    setOrganiserId("organiser-1");
+  }
 
-  return <h1>Backend status: {status}</h1>;
+  return (
+      <div>
+        {selectedRole === null ? (
+            <RoleSelection
+                onContinue={setSelectedRole}
+                organiserId={organiserId}
+                onOrganiserChange={setOrganiserId}
+            />
+        ) : (
+            <>
+              <header>
+                <span>Community Events Platform</span>
+                <span>
+              Current role: {selectedRole}
+            </span>
+                <button onClick={switchRole}>Switch role</button>
+              </header>
+
+              <main>
+                {selectedRole === "visitor" && <h1>Visitor Dashboard</h1>}
+                {selectedRole === "organiser" && (
+                    <h1>Organiser Dashboard</h1>
+                )}
+                {selectedRole === "admin" && <h1>Admin Dashboard</h1>}
+              </main>
+            </>
+        )}
+      </div>
+  );
 }
 
 export default App;
