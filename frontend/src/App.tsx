@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Role } from "./types/event";
 import RoleSelection from "./pages/RoleSelection";
+import VisitorDashboard from "./components/VisitorDashboard";
 
 function App() {
   const [selectedRole, setSelectedRole] = useState<Role | null>(null);
@@ -30,7 +31,7 @@ function App() {
               </header>
 
               <main>
-                {selectedRole === "visitor" && <h1>Visitor Dashboard</h1>}
+                {selectedRole === "visitor" && <VisitorDashboard />}
                 {selectedRole === "organiser" && (
                     <h1>Organiser Dashboard</h1>
                 )}
